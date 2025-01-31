@@ -1,17 +1,16 @@
 body {
+    margin-top: 1cm;
     background-color: lightgray;
 }
 
 div{
-    margin-left: 2.3cm;
+margin-bottom: 0.2cm;
 }
 
 .bordered {
     background-color: white;
     border: 2px solid black;
     height: 260px;
-    width: 500px;
-    text-align: center; 
-    margin-top: 6cm; 
-    margin-left: 1cm;
+    width: 745px;
+    text-align: center;  
 }
