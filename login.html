@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Log In</title>
+    <link rel="stylesheet" href="custom_style.css">
+    <script src="login.js"></script>
+    <!--<style>
+        body {
+            background-color: lightblue;
+        }
+
+        h1 {
+            color: navy;
+            margin-left: 20px;
+        }
+
+        .bordered {
+            border-width: 5px;
+            border-color: black;
+        }
+    </style>-->
+</head>
+
+<body>
+    <div>
+        <form action="action.php" class="bordered">
+            <img src="Logo.png" width="180px"><br>
+            <label for="username" style="font-size:20px; margin-right: 0.2cm;">username:</label><input type="text" size="20" maxlength="10" placeholder="username" pattern="[a-z]{3}" required autofocus id="username">
+                <input type="button" style="margin-left: 0.5cm; margin-bottom: 1%;" onclick="svuotausername()" value="delete"><br>
+            <label for="password" style="font-size:20px; margin-right: 0.2cm;">password:</label><input type="password" size="20" maxlength="16" placeholder="password" pattern="[a-z]{1,}[\d]{1,}" required id="password">
+                <input type="button" style="margin-left: 0.5cm;" onclick="svuotapassword()" value="delete"><br>
+            <input type="submit" style="margin-left: 10px; margin-top: 10px;" value="login">
+            <input type="reset" value="reset"><br>
+        </form>
+    </div>
+</body>
+
+</html>
