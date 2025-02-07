@@ -71,7 +71,7 @@ const lessons = [
   },
 ];
 
-window.onload = getList;
+window.onload = generateLessonList;
 
 function generateLessonList() {
   let nodes = [];
@@ -81,7 +81,10 @@ function generateLessonList() {
     li.appendChild(title);
     nodes[i] = li;
   }
-  return nodes;
+  let ul = document.getElementById("lista");
+  for (i = 0; i < nodes.length; i++) {
+    ul.appendChild(nodes[i]);
+  }
 }
 
 /*
@@ -95,6 +98,7 @@ function generateLessonList() {
   return nodes;
 }
 */
+/*
 function getList() {
   let nodes = generateLessonList();
   let ul = document.getElementById("lista");
@@ -102,3 +106,4 @@ function getList() {
     ul.appendChild(nodes[i]);
   }
 }
+  */
