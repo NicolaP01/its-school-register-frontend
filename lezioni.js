@@ -78,11 +78,9 @@ function generateLessonList() {
   for (i = 0; i < lessons.length; i++) {
     var li = document.createElement("li");
     var title = document.createTextNode(lessons[i].title);
+    let ul = document.getElementById("lista");
     li.appendChild(title);
     nodes[i] = li;
-  }
-  let ul = document.getElementById("lista");
-  for (i = 0; i < nodes.length; i++) {
     ul.appendChild(nodes[i]);
   }
 }
