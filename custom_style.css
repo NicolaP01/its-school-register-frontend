@@ -3,8 +3,8 @@ body {
     background-color: lightgray;
 }
 
-div{
-margin-bottom: 0.2cm;
+div {
+    margin-bottom: 0.2cm;
 }
 
 .bordered {
@@ -12,5 +12,5 @@ margin-bottom: 0.2cm;
     border: 2px solid black;
     height: 260px;
     width: 745px;
-    text-align: center;  
+    text-align: center;
 }
