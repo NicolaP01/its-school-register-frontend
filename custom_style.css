@@ -1,6 +1,6 @@
 body {
     margin-top: 1cm;
-    background-color: lightgray;
+    background-color: white;
 }
 
 div {
@@ -11,6 +11,5 @@ div {
     background-color: white;
     border: 2px solid black;
     height: 260px;
-    width: 745px;
     text-align: center;
 }
