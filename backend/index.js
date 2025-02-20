@@ -2,7 +2,7 @@ const express = require('express')
 var cors = require('cors')
 const app = express()
 var bodyParser = require('body-parser')
-const conn=require('./connector.js')
+const con = require('./connector.js')
 const port = 3000
 
 // inizializzazione connessione
@@ -34,26 +34,54 @@ connection.end((err) => {
 var jsonParser = bodyParser.json()
 
 var corsOptions = {
-    origin: '*',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-  }
+  origin: '*',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
 // Enable CORS for all routes
 app.use(cors(corsOptions));
 
 
-app.get('/', (req, res) => {
+app.get('/getallusers', async (req, res) => {
+  let startvalue = (req.query.startvalue - 1) * req.query.endvalue;
+  let endvalue = (req.query.startvalue * req.query.endvalue) - 1;
+    try {
+      const [data] = await con.execute(`select * from users LIMIT ${startvalue},${endvalue}`);
+      data.forEach((row) => {
+        console.log(`${row.id} = ${row.lastname} ${row.firstname}`);
+      });
 
-  res.send('Hello World!')
+      res.json(data);
+    } catch (err) {
+      console.log(err);
+      res.json({ error: true, errormessage: "retrieve users error" });
+    }
 })
+/*
+app.get('/getallusers', async (req, res) => {
+  pagenumber=(req.query.pagenumber - 1) * req.query.pagesize;
+  pagesize=(req.query.pagenumber * req.query.pagesize) - 1;
+  try{
+    const [data] = await con.execute(`select * from users LIMIT ${pagenumber},${pagesize}`);
+    data.forEach( (row) => {
+      console.log(`${row.id} = ${row.lastname} ${row.firstname}`);
+    });
+
+    res.json(data);
+  } catch(err) {
+    console.log(err);
+    res.json({ error: true, errormessage: "retrieve users error"});
+  }
+
+})*/
 
 app.post('/Register', jsonParser, (req, res) => {
-    console.log(req.body);
-    res.statusCode = 200;
-    res.send('Register')
+  console.log(req.body);
+  res.statusCode = 200;
+  res.send('Register')
 })
 
 
 app.listen(port, () => {
-    console.log(`Its register app listening on port ${port}`)
-  })
+  console.log(`Its register app listening on port ${port}`)
+})
