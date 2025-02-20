@@ -2,11 +2,11 @@ const express = require('express')
 var cors = require('cors')
 const app = express()
 var bodyParser = require('body-parser')
-var mysql = require('mysql2')
+const conn=require('./connector.js')
 const port = 3000
 
 // inizializzazione connessione
-const connection = mysql.createConnection({
+/*const connection = mysql.createConnection({
     host     : '127.0.0.1', // macchina locale, localhost == 127.0.0.1
     port     : 3306,
     user     : 'its_user',
@@ -24,7 +24,6 @@ connection.connect(function (err) {
   console.log(`connected to database`);
 });
 
-/*
 connection.end((err) => {
   // The connection is terminated gracefully
   // Ensures all remaining queries are executed
