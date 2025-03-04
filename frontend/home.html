@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Class Register
+    </title>
+    <script src="home.js"></script>
+    <!-- <link rel="stylesheet" href="home.css"> -->
+    <style>
+        div {
+            background-color: red;
+            height: 1150px;
+            width: 100%;
+        }
+
+        #attend {
+            position: absolute;
+            background-color: blue;
+            color: white;
+            text-indent: 1%;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding-bottom: 10px;
+            width: 95%;
+            height: fit-content;
+            z-index: 1;
+        }
+
+        #less{
+            position: absolute;
+            background-color: black;
+            color: white;
+            text-indent: 1%;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding-bottom: 10px;
+            width: 95%;
+            height: fit-content;
+            z-index: 1;
+        }
+
+        #stud {
+            position: absolute;
+            background-color: orange;
+            color: white;
+            text-indent: 1%;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding-bottom: 10px;
+            width: 95%;
+            height: fit-content;
+            z-index: 1;
+        }
+
+        #class {
+            position: absolute;
+            background-color: darkgreen;
+            color: white;
+            text-indent: 1%;
+            margin-top: 10px;
+            margin-left: 10px;
+            padding-bottom: 10px;
+            width: 95%;
+            height: fit-content;
+            z-index: 1;
+        }
+
+        button{
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        h2{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align: center;">Class Register</h1>
+    <div>
+        
+        <button id="buttoncl">Classes</button><button id="buttonst">Students</button><button id="buttonle">Lessons</button><button id="buttonatt">Attendance</button>
+        
+        <h2 id="classes">Classes</h2>
+        <h2 id="students" hidden>Students</h2>
+        <h2 id="lessons" hidden>Lessons</h2>
+        <h2 id="attendances" hidden>Attendances</h2>
+
+        <div id="attend" hidden>
+            <p style="font-size: 20px;">lessons:</p>
+            <input type="text" size="95" style="margin-left: 10px;" id="lessonsatt">
+            <p style="font-size: 20px;">students:</p>
+            <input type="text" size="95" style="margin-left: 10px;" id="studentsatt">
+            <p style="font-size: 20px;">status:</p>
+            <input type="text" size="95" style="margin-left: 10px;" id="statusatt">
+        </div>
+        
+        <div id="less" hidden>
+            <p style="font-size: 20px;">class name:</p>
+            <input type="text" size="95" style="margin-left: 10px;" id="textl"><br>
+        </div>
+
+        <div id="stud" hidden>
+            <p style="font-size: 20px;">class name:</p>
+            <input type="text" size="95" style="margin-left: 10px;" id="texts"><br>
+        </div>
+
+        <div id="class">
+            <p style="font-size: 20px;">class name:</p>
+            <input type="text" size="95" style="margin-left: 10px;" id="textc"><br>
+            <input type="button" value="Add Class" onclick="addClass()" style="margin-left: 10px; margin-top: 10px; margin-bottom: 10px;">
+        </div>
+
+    </div>
+
+</body>
+
+</html>
