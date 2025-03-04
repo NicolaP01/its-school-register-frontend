@@ -103,3 +103,17 @@ function showAttendance() {
         attendances.hidden = false;
     }
 }
+
+function createClass(){
+    let classList=document.getElementById("classList");
+    let textc=document.getElementById("textc");
+    let listcontent=document.createElement("li");
+    let deleteb=document.createElement("button");
+    deleteb.addEventListener("click", function () {listcontent.remove()})
+    listcontent.innerText=textc.value;
+    deleteb.style.height="20px";
+    deleteb.style.width="fit-content";
+    deleteb.innerText="Delete"
+    listcontent.appendChild(deleteb);
+    classList.appendChild(listcontent);
+}

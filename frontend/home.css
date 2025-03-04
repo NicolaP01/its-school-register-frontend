@@ -1,5 +1,5 @@
-div {
-    background-color: red;
+#mainpage {
+    /*background-color: red; */
     height: 1150px;
     width: 100%;
 }
@@ -45,15 +45,17 @@ div {
 
 #class {
     position: absolute;
-    background-color: darkgreen;
-    color: white;
+    background-color: rgb(196, 238, 196);
+    color: black;
     text-indent: 1%;
-    margin-top: 10px;
     margin-left: 10px;
     padding-bottom: 10px;
     width: 95%;
     height: fit-content;
     z-index: 1;
+    border-color: black;
+    border-style: groove;
+    border-width: 1px;
 }
 
 button {
@@ -61,6 +63,53 @@ button {
     margin-top: 10px;
 }
 
-h2 {
+#classes,
+#students,
+#lessons,
+#attendances {
     margin-left: 10px;
+    font-size: 30px;
+}
+
+li {
+    background-color: rgb(196, 238, 196);
+    color: black;
+    border-bottom-color: lightslategray;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-style: groove;
+    border-width: 1px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+#pages {
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: lightgrey;
+    border-style: groove;
+    border-bottom-width: 1px;
+    padding-bottom: 3px;
+    text-align: center;
+}
+
+#buttoncl,
+#buttonst,
+#buttonle,
+#buttonatt {
+    background-color: white;
+    border-color: transparent;
+    color: lightgreen;
+    margin-right: 40px;
+    font-size: 20px;
+}
+
+#buttoncl:hover,
+#buttonst:hover,
+#buttonle:hover,
+#buttonatt:hover {
+    background-color: green;
 }

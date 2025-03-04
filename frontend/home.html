@@ -13,10 +13,11 @@
 <body>
 
     <h1 style="text-align: center;">CLASS REGISTER</h1>
-    <div>
-
-        <button id="buttoncl">Classes</button><button id="buttonst">Students</button>
-        <button id="buttonle">Lessons</button><button id="buttonatt">Attendance</button>
+    <div id="mainpage">
+        <div id="pages">
+            <button id="buttoncl">Classes</button><button id="buttonst">Students</button>
+            <button id="buttonle">Lessons</button><button id="buttonatt">Attendance</button>
+        </div>        
 
         <h2 id="classes">Classes</h2>
         <h2 id="students" hidden>Students</h2>
@@ -25,28 +26,34 @@
 
         <div id="attend" hidden>
             <p style="font-size: 20px;">lessons:</p>
-            <input type="text" size="95" style="margin-left: 10px;" id="lessonsatt">
+            <input type="text" size="90" style="margin-left: 10px;" id="lessonsatt">
             <p style="font-size: 20px;">students:</p>
-            <input type="text" size="95" style="margin-left: 10px;" id="studentsatt">
+            <input type="text" size="90" style="margin-left: 10px;" id="studentsatt">
             <p style="font-size: 20px;">status:</p>
-            <input type="text" size="95" style="margin-left: 10px;" id="statusatt">
+            <input type="text" size="90" style="margin-left: 10px;" id="statusatt">
         </div>
 
         <div id="less" hidden>
             <p style="font-size: 20px;">class name:</p>
-            <input type="text" size="95" style="margin-left: 10px;" id="textl"><br>
+            <input type="text" size="90" style="margin-left: 10px;" id="textl"><br>
         </div>
 
         <div id="stud" hidden>
-            <p style="font-size: 20px;">class name:</p>
-            <input type="text" size="95" style="margin-left: 10px;" id="texts"><br>
+            <h2 style="font-size: 20px;">class name:</h2>
+            <input type="text" size="90" style="margin-left: 10px;" id="texts"><br>
         </div>
 
         <div id="class">
-            <p style="font-size: 20px;">class name:</p>
-            <input type="text" size="95" style="margin-left: 10px;" id="textc"><br>
-            <input type="button" value="Add Class" onclick="addClass()"
+            <h2 style="font-size: 22px;">Class name:</h2>
+            <input type="text" size="90" style="margin-left: 10px; padding-bottom: 5px; padding-top: 5px;" id="textc"><br>
+            <input type="button" value="Add Class" onclick="createClass()"
                 style="margin-left: 10px; margin-top: 10px; margin-bottom: 10px;">
+                <div>
+                    <h3 style="font-size: 22px; color: green;">Class List</h3>
+                    <ul id="classList">
+
+                    </ul>
+                </div>
         </div>
 
     </div>
