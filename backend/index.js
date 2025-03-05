@@ -17,6 +17,23 @@ var corsOptions = {
 // Enable CORS for all routes
 app.use(cors(corsOptions));
 
+app.post('/login', jsonParser, async (req,res) => {
+  let requestbody = req.body;
+  try {
+    var hash = crypto.createHash('sha256').update(requestbody.password).digest('hex');
+    const data = await con.execute(`select id from users where email = ? and password = ?`, [requestbody.email, hash]);
+    if (data[0].length < 1) {
+      res.json({ error: true, errormessage: "INVALID_USERPWD" });
+    }
+    else {
+      res.json({ error: false, errormessage: "", token: "codice"});
+    }
+  } catch (err) {
+    console.log(err);
+    res.json({ error: true, errormessage: "GENERIC_ERROR" });
+  }
+});
+
 app.post('/createuser', jsonParser, async (req, res) => {
 
   let requestbody = req.body;
