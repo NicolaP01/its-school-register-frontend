@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const express = require('express')
 var cors = require('cors')
 const app = express()
@@ -25,8 +26,9 @@ app.post('/createuser', jsonParser, async (req, res) => {
     const validation = await con.execute('select * from users where fiscalcode = ?', [requestbody.fiscalcode]);
 
     if (validation[0].length < 1) {
+      var hash = crypto.createHash('sha256').update(requestbody.password).digest('hex');
       // user creation
-      const [data] = await con.execute(`insert into users (password, lastname, firstname, phone, email, active, fiscalcode) values (?,?,?,?,?,?,?)`, [requestbody.password, requestbody.lastname, requestbody.firstname, requestbody.phone, requestbody.email, requestbody.active, requestbody.fiscalcode]);
+      const [data] = await con.execute(`insert into users (password, lastname, firstname, phone, email, active, fiscalcode) values (?,?,?,?,?,?,?)`, [hash, requestbody.lastname, requestbody.firstname, requestbody.phone, requestbody.email, requestbody.active, requestbody.fiscalcode]);
       res.json(data);
     }
     else {
