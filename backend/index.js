@@ -1,11 +1,15 @@
 const crypto = require('crypto');
-const express = require('express')
-var cors = require('cors')
-const app = express()
-var bodyParser = require('body-parser')
-const con = require('./connector.js')
-const port = 3000
+const express = require('express');
+var cors = require('cors');
+const jwt= require('jsonwebtoken');
+const app = express();
+var bodyParser = require('body-parser');
+const con = require('./connector.js');
+const port = 3000;
 
+//generate secret key (only 1 time)
+/*let secreykey = require('crypto').randomBytes(64).toString('hex');
+console.log(secreykey);*/  
 
 var jsonParser = bodyParser.json()
 
@@ -17,16 +21,17 @@ var corsOptions = {
 // Enable CORS for all routes
 app.use(cors(corsOptions));
 
-app.post('/login', jsonParser, async (req,res) => {
+app.post('/login', jsonParser, async (req, res) => {
   let requestbody = req.body;
   try {
     var hash = crypto.createHash('sha256').update(requestbody.password).digest('hex');
-    const data = await con.execute(`select id from users where email = ? and password = ?`, [requestbody.email, hash]);
+    const data = await con.execute(`select id from users where email = ? and password = ? and active = 1`, [requestbody.email, hash]);
     if (data[0].length < 1) {
       res.json({ error: true, errormessage: "INVALID_USERPWD" });
     }
     else {
-      res.json({ error: false, errormessage: "", token: "codice"});
+      const token=generateAccessToken({username: requestbody.email});
+      res.json({ error: false, errormessage: "", token: token });
     }
   } catch (err) {
     console.log(err);
@@ -34,7 +39,7 @@ app.post('/login', jsonParser, async (req,res) => {
   }
 });
 
-app.post('/createuser', jsonParser, async (req, res) => {
+app.post('/createuser', authenticateToken, jsonParser, async (req, res) => {
 
   let requestbody = req.body;
 
@@ -59,8 +64,25 @@ app.post('/createuser', jsonParser, async (req, res) => {
   }
 });
 
+app.delete('/deleteuser/:id', authenticateToken, async (req, res) => {
+  let deleteid = req.params.id;
 
-app.get('/getallusers', async (req, res) => {
+  try {
+    const data = await con.execute('DELETE FROM users WHERE id = ?', [deleteid]);
+    if (data[0].length < 1) {
+      res.json({ error: true, errormessage: "INVALID_USERPWD" });
+    }
+    else{
+      res.json(data);
+    }
+  } catch (err) {
+    console.error(err);
+    res.json({ error: true, errormessage: "DELETE_ERROR" });
+  }
+})
+
+
+app.get('/getallusers', authenticateToken, async (req, res) => {
   let startvalue = (req.query.startvalue - 1) * req.query.endvalue;
   let endvalue = (req.query.startvalue * req.query.endvalue) - 1;
   try {
@@ -75,23 +97,23 @@ app.get('/getallusers', async (req, res) => {
     res.json({ error: true, errormessage: "retrieve users error" });
   }
 })
-/*
-app.get('/getallusers', async (req, res) => {
-  pagenumber=(req.query.pagenumber - 1) * req.query.pagesize;
-  pagesize=(req.query.pagenumber * req.query.pagesize) - 1;
-  try{
-    const [data] = await con.execute(`select * from users LIMIT ${pagenumber},${pagesize}`);
-    data.forEach( (row) => {
+
+app.get('/getuser', authenticateToken, async (req, res) => {
+  
+  try {
+    const [data] = await con.execute(`select * from users where id = ? LIMIT 1`, [req.query.id]);
+    
+    data.forEach((row) => {
       console.log(`${row.id} = ${row.lastname} ${row.firstname}`);
     });
-    
+
     res.json(data);
-  } catch(err) {
-    console.log(err);
-    res.json({ error: true, errormessage: "retrieve users error"});
+
+  } catch (err) {
+    console.log("Getuser Error:" + err);
+    res.json({ error: true, errormessage: "GENERIC_ERROR"});
   }
-  
-})*/
+})
 
 app.post('/Register', jsonParser, (req, res) => {
   console.log(req.body);
@@ -129,3 +151,21 @@ connection.end((err) => {
   // Then sends a quit packet to the MySQL server.
 });
 */
+
+function generateAccessToken(username) {
+  return jwt.sign(username, process.env.TOKEN_SECRET, { expiresIn: '1800s' });
+}
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+
+  if (token == null) return res.sendStatus(401)
+
+  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+    console.log(err)
+    if (err) return res.sendStatus(403)
+    req.user = user
+    next()
+  })
+}
