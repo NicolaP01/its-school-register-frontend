@@ -11,15 +11,6 @@ function addEvents() {
     buttonatt.addEventListener("click", showAttendance);
 }
 
-let classe = document.getElementById("class");
-let classes = document.getElementById("classes");
-let stud = document.getElementById("stud");
-let students = document.getElementById("students");
-let less = document.getElementById("less");
-let lessons = document.getElementById("lessons");
-let attend = document.getElementById("attend");
-let attendances = document.getElementById("attendances");
-
 function showClasses() {
     let classe = document.getElementById("class");
     let classes = document.getElementById("classes");
@@ -105,15 +96,23 @@ function showAttendance() {
 }
 
 function createClass(){
-    let classList=document.getElementById("classList");
+    let listcl=document.getElementById("classList");
     let textc=document.getElementById("textc");
     let listcontent=document.createElement("li");
     let deleteb=document.createElement("button");
+    let selectst=document.getElementById("selectst");
+    let optionst=document.createElement("option");
     deleteb.addEventListener("click", function () {listcontent.remove()})
     listcontent.innerText=textc.value;
+    optionst.innerText=textc.value;
     deleteb.style.height="25px";
     deleteb.style.width="fit-content";
-    deleteb.innerText="Delete"
+    deleteb.innerText="DELETE"
     listcontent.appendChild(deleteb);
-    classList.appendChild(listcontent);
+    listcl.appendChild(listcontent);
+    selectst.appendChild(optionst);
+}
+
+function addStudent(){
+    
 }

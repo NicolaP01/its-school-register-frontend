@@ -68,9 +68,9 @@ app.delete('/deleteuser/:id', authenticateToken, async (req, res) => {
   let deleteid = req.params.id;
 
   try {
-    const data = await con.execute('DELETE FROM users WHERE id = ?', [deleteid]);
+    const data = await con.execute('delete from users where id = ?', [deleteid]);
     if (data[0].length < 1) {
-      res.json({ error: true, errormessage: "INVALID_USERPWD" });
+      res.json({ error: true, errormessage: "INVALID_ID" });
     }
     else{
       res.json(data);

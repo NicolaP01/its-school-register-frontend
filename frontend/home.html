@@ -39,8 +39,18 @@
         </div>
 
         <div id="stud" hidden>
-            <h2 style="font-size: 20px;">class name:</h2>
-            <input type="text" size="90" style="margin-left: 10px;" id="texts"><br>
+            <h2 style="font-size: 20px;">Students Name:</h2>
+            <input type="text" size="180" style="margin-left: 10px;" id="texts"><br><br>
+            <h2 style="font-size: 20px;">Class:</h2>
+            <select id="selectst">
+                <option>Select a class</option>
+            </select><br>
+            <input type="button" value="Add Student" onclick="addStudent()" style="margin-left: 10px; margin-top: 10px; margin-bottom: 10px;">
+            <div>
+                <h3 style="font-size: 22px; color: green;">Student List</h3>
+                <ul id="studentList">
+                </ul>
+            </div>
         </div>
 
         <div id="class">

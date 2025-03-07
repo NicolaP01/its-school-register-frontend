@@ -41,6 +41,9 @@
     width: 95%;
     height: fit-content;
     z-index: 1;
+    border-color: black;
+    border-style: groove;
+    border-width: 1px;
 }
 
 #class {
@@ -112,4 +115,11 @@ li {
 #buttonle:hover,
 #buttonatt:hover {
     background-color: green;
+}
+
+#selectst{
+    margin-left: 10px;
+    width: 700px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
