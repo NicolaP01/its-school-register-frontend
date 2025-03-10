@@ -1,15 +1,15 @@
 body {
-    margin-top: 1cm;
     background-color: white;
 }
 
 div {
-    margin-bottom: 0.2cm;
-}
-
-.bordered {
+    margin-bottom: 5px;
     background-color: white;
     border: 2px solid black;
     height: 260px;
     text-align: center;
+}
+
+#buttonlog{
+    margin-top: 5px;
 }
