@@ -36,53 +36,64 @@ class ApiClient {
     constructor(baseUrl = 'http://localhost:3000') {
         this.baseUrl = baseUrl;
         this.token = null;
-        this.buttonlog = document.getElementById('buttonlog')
-        this.buttonlog.addEventListener("click", function async(email, password) {
+    }
 
-            // Login and get token
-            return new Promise((resolve, reject) => {
-                try {
-                    const xhr = new XMLHttpRequest();
-                    xhr.open('POST', `${this.baseUrl}/login`, true);
-                    xhr.setRequestHeader('Content-Type', 'application/json');
+    async login(emailInput, password) {
+        // Login and get token
+        return new Promise((resolve, reject) => {
+            try {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', `${this.baseUrl}/login`, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
 
-                    xhr.onload = () => {
-                        if (xhr.status >= 200 && xhr.status < 300) {
-                            const response = JSON.parse(xhr.responseText);
-                            if (response.error === false && response.token) {
-                                this.token = response.token;
-                                console.log('Login successful!');
-                                resolve(true);
-                            } else {
-                                console.error(`Login failed: ${response.errormessage}`);
-                                resolve(false);
-                            }
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.error === false && response.token) {
+                            this.token = response.token;
+                            console.log('Login successful!');
+                            resolve(true);
                         } else {
-                            console.error(`HTTP error: ${xhr.status}`);
+                            console.error(`Login failed: ${response.errormessage}`);
                             resolve(false);
                         }
-                    };
-
-                    xhr.onerror = () => {
-                        console.error('Login error: Network error');
+                    } else {
+                        console.error(`HTTP error: ${xhr.status}`);
                         resolve(false);
-                    };
+                    }
+                };
 
-                    xhr.send(JSON.stringify({
-                        email: email,
-                        pwd: password
-                    }));
-                } catch (error) {
-                    console.error('Login error:', error.message);
+                xhr.onerror = () => {
+                    console.error('Login error: Network error');
                     resolve(false);
-                }
-            });
+                };
+
+                xhr.send(JSON.stringify({
+                    email: emailInput,
+                    pwd: password
+                }));
+            } catch (error) {
+                console.error('Login error:', error.message);
+                resolve(false);
+            }
         });
     }
 }
 
 // Export classes for use in other files
-module.exports = {
+/*module.exports = {
     User,
     ApiClient
-};
+};*/
+
+function main() {
+    const client = new ApiClient();
+    let emailInput=document.getElementById("email").textContent;
+    let password=document.getElementById("password").textContent;
+    let buttonlog = document.getElementById('buttonlog')
+    buttonlog.addEventListener("click", (ev) => {
+        client.login(emailInput, password);
+    });
+}
+
+window.onload=main;
