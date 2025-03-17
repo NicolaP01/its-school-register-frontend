@@ -67,6 +67,12 @@ class ApiClient {
                     console.error('Login error: Network error');
                     resolve(false);
                 };
+                
+                /*console.log(JSON.stringify({
+                    email: emailInput,
+                    pwd: password
+                }));
+                */
 
                 xhr.send(JSON.stringify({
                     email: emailInput,
@@ -88,12 +94,14 @@ class ApiClient {
 
 function main() {
     const client = new ApiClient();
-    let emailInput=document.getElementById("email").textContent;
-    let password=document.getElementById("password").textContent;
     let buttonlog = document.getElementById('buttonlog')
     buttonlog.addEventListener("click", (ev) => {
+        let emailInput = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        //console.log(emailInput);
+        //console.log(password);
         client.login(emailInput, password);
     });
 }
 
-window.onload=main;
+window.onload = main;
